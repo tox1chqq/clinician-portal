@@ -6,7 +6,7 @@ interface IPanelLayout  {
 }
 
 export const PanelLayout:FC<IPanelLayout> = ({children}) => {
-    return <Grid item xs={6} sx={{backgroundColor:'mainBackground', borderRadius: '10px'}}>
+    return <Grid item xs={12} sx={{backgroundColor:'mainBackground', borderRadius: '10px',padding:'12px 24px !important',marginBottom:'16px'}}>
         {children}
     </Grid>
 }
