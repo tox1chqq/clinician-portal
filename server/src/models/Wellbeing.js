@@ -1,6 +1,6 @@
-const { Schema, model } = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const Wellbeing = new Schema(
+const WellbeingSchema = new Schema(
   {
     date: { type: Date, required: true },
     day: { type: String },
@@ -11,4 +11,4 @@ const Wellbeing = new Schema(
   { _id: false }
 );
 
-module.exports = model("Wellbeing", Wellbeing);
+export const Wellbeing = model("Wellbeing", WellbeingSchema);

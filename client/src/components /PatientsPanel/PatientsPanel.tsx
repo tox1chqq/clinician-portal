@@ -68,7 +68,7 @@ export const PatientsPanel: FC = () => {
               </Typography>
             </Grid>
           </Grid>
-          <Grid
+          <Grid item
             xs={10}
             sx={{ display: "flex", justifyContent: "space-between" }}
           >

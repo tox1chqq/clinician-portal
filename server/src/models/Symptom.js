@@ -1,6 +1,6 @@
-const { Schema, model } = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const Symptom = new Schema(
+const SymptomSchema = new Schema(
   {
     name: { type: String, required: true },
     status: { type: String, required: true },
@@ -8,4 +8,4 @@ const Symptom = new Schema(
   { _id: false }
 );
 
-module.exports = model("Symptom", Symptom);
+export const Symptom = model("Symptom", SymptomSchema);

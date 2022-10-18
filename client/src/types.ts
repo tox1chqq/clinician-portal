@@ -4,18 +4,41 @@ export interface ILineProgressItem {
   color: string;
 }
 
-export interface IPatient {
-  id: number;
-  name: string;
-  medication: string;
-  medication_dose: number;
-  wellbeing: number;
-  mood: number;
-  adherence: number;
-  symptoms: ISymptoms[];
-}
-
 interface ISymptoms {
   name: string;
-  state: string;
+  status: string;
+}
+
+interface IDayState{
+  data: string,
+  day: string,
+  day_mood: number,
+  day_wellbeing: number,
+  symptoms: ISymptoms[]
+}
+
+interface IMedication{
+  medication_dose: string,
+  medication_name: string
+}
+
+
+
+export interface IPatient{
+  _id: number,
+  fullName: string,
+  sex: string,
+  adherence: number,
+  symptoms: ISymptoms[],
+  wellbeing: IDayState[],
+  medications: IMedication[]
+}
+
+
+export interface IPortalData{
+  femaleCount: number,
+  maleCount: number,
+  moodAvarage: number,
+  wellbeingAvarage: number,
+  patients: IPatient[]
 }

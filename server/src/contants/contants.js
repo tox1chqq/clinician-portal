@@ -9,6 +9,6 @@ export const ResponseMessages = {
   SUCCESS_ADD: "Patient has added successfully",
   SUCCESS_DELETE: "User was deleted successfully",
   ERROR: "Something went wrong",
-  PATIENT_NOT_FOUND: "Patient not found",
+  NOT_FOUND: "Patient not found",
   SERVER_ERROR: "Server error",
 };

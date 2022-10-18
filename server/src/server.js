@@ -1,13 +1,16 @@
+import express from "express";
+import patientsRouter from "./routers/patients.router.js";
 import "./database/connection.js";
-import { config } from "./config /config";
-const express = require("express");
-const patientsRouter = require("./routers/patients.routers");
+import { config } from "./config/config.js";
+import { globalErrorHandler } from "./errors/globalHandlerError.js";
+import cors from 'cors'
 
 export default class Server {
   constructor() {
     this.app = express();
-    this.settings();
+    this.applySettings();
     this.applyRouters();
+    this.globalErrorHandler();
   }
 
   startApp() {
@@ -16,11 +19,16 @@ export default class Server {
     });
   }
 
-  settings() {
+  applySettings() {
     this.app.use(express.json());
+    this.app.use(cors());
   }
 
   applyRouters() {
     this.app.use("/", patientsRouter);
+  }
+
+  globalErrorHandler() {
+    this.app.use(globalErrorHandler);
   }
 }

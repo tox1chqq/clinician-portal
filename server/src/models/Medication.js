@@ -1,6 +1,6 @@
-const { Schema, model } = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const Medication = new Schema(
+const MedicationSchema = new Schema(
   {
     medication_name: { type: String, required: true },
     medication_dose: { type: String, required: true },
@@ -8,4 +8,4 @@ const Medication = new Schema(
   { _id: false }
 );
 
-module.exports = model("Medication", Medication);
+export const Medication = model("Medication", MedicationSchema);

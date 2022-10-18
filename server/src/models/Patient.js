@@ -1,6 +1,6 @@
-const { Schema, model } = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const Patient = new Schema({
+const PatientSchema = new Schema({
   fullName: { type: String, required: true },
   sex: { type: String, required: true },
   medications: { type: Array, ref: "Medication" },
@@ -9,4 +9,4 @@ const Patient = new Schema({
   adherence: { type: Number, required: true },
 });
 
-module.exports = model("Patient", Patient);
+export const Patient = model("Patient", PatientSchema);

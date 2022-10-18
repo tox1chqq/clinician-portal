@@ -1,9 +1,28 @@
-import Patient from "../models/Patient";
-import { HttpStatusCodes, ResponseMessages } from "../contants/contants";
+import { Patient } from "../models/Patient.js";
+import { HttpStatusCodes, ResponseMessages } from "../contants/contants.js";
+import { PatientError } from "../errors/errors.js";
 
 export default class PatientsService {
   static async getPatients() {
-    return Patient.find({});
+    const patients = await Patient.find({});
+
+    const maleCount = patients.filter((item) => item.sex === "Male").length;
+    const femaleCount = patients.filter((item) => item.sex === "Female").length;
+
+    const wellbeingAvarage = (patients.reduce((prev,current) => {
+      return prev + (current.wellbeing.reduce((prevDay, currentDay) => {
+        return prevDay + currentDay.day_wellbeing
+      },0) / current.wellbeing.length)
+    },0)/patients.length).toFixed(1)
+
+    const moodAvarage = (patients.reduce((prev,current) => {
+      return prev + (current.wellbeing.reduce((prevDay, currentDay) => {
+        return prevDay + currentDay.day_mood
+      },0) / current.wellbeing.length)
+    },0)/patients.length).toFixed(1)
+
+
+    return {maleCount, femaleCount, moodAvarage,wellbeingAvarage,patients };
   }
 
   static async createNewPatient(
@@ -11,7 +30,8 @@ export default class PatientsService {
     sex,
     medications,
     wellbeing,
-    symptoms
+    symptoms,
+    adherence
   ) {
     const patient = new Patient({
       fullName,
@@ -19,6 +39,7 @@ export default class PatientsService {
       medications,
       wellbeing,
       symptoms,
+      adherence,
     });
 
     await patient.save();
@@ -30,7 +51,10 @@ export default class PatientsService {
     const data = await Patient.findByIdAndRemove(id);
 
     if (!data) {
-      throw new Error(ResponseMessages.PATIENT_NOT_FOUND);
+      throw new PatientError(
+        HttpStatusCodes.NOT_FOUND,
+        ResponseMessages.NOT_FOUND
+      );
     }
 
     return { message: ResponseMessages.SUCCESS_DELETE };

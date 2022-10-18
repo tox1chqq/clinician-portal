@@ -1,55 +1,49 @@
-const { HttpStatusCodes, ResponseMessages } = require("../contants/contants");
-const PatientsService = require("../services/patientsServices");
+import { HttpStatusCodes, ResponseMessages } from "../contants/contants.js";
+import PatientsService from "../services/patientsServices.js";
 
-class PatientsController {
-  async createNewPatient(req, res) {
+export default class PatientsController {
+  async createNewPatient(req, res, next) {
     try {
-      const { fullName, sex, medications, wellbeing, symptoms } = req.body;
+      const { fullName, sex, medications, wellbeing, symptoms, adherence } =
+        req.body;
 
       const result = await PatientsService.createNewPatient(
         fullName,
         sex,
         medications,
         wellbeing,
-        symptoms
+        symptoms,
+        adherence
       );
 
       return res.status(HttpStatusCodes.SUCCESS).json(result);
     } catch (e) {
       console.log(e);
-      res
-        .status(HttpStatusCodes.SERVER_ERROR)
-        .json({ error: ResponseMessages.SERVER_ERROR });
+      next(e);
     }
   }
 
-  async getPatients(req, res) {
+  async getPatients(req, res, next) {
     try {
       const result = await PatientsService.getPatients();
 
       return res.status(HttpStatusCodes.SUCCESS).json(result);
     } catch (e) {
       console.log(e);
-      res
-        .status(HttpStatusCodes.SERVER_ERROR)
-        .json({ error: ResponseMessages.SERVER_ERROR });
+      next(e);
     }
   }
 
-  async deletePatient(req, res) {
+  async deletePatient(req, res, next) {
     try {
-      const {id} = req.params;
+      const { id } = req.params;
 
       const result = await PatientsService.deletePatient(id);
 
       return res.status(HttpStatusCodes.SUCCESS).json(result);
     } catch (e) {
       console.log(e);
-      res
-        .status(HttpStatusCodes.SERVER_ERROR)
-        .json({ error: ResponseMessages.SERVER_ERROR });
+      next(e);
     }
   }
 }
-
-module.exports = new PatientsController();
