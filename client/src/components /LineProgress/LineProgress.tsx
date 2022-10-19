@@ -1,11 +1,12 @@
-import React, { FC } from "react";
-import { ILineProgressItem } from "../../types";
+import  { FC } from "react";
+import { IStaticticItem} from "../../types";
 
 interface ILineProgress {
-  data: ILineProgressItem[];
+  data: IStaticticItem[];
+  totalCount: number
 }
 
-export const LineProgress: FC<ILineProgress> = ({ data }) => {
+export const LineProgress: FC<ILineProgress> = ({ data,totalCount }) => {
   return (
     <div
       style={{
@@ -15,12 +16,12 @@ export const LineProgress: FC<ILineProgress> = ({ data }) => {
         borderRadius: "0px 4px 4px 0px",
       }}
     >
-      {data.map((item) => (
+      {data.map(item => (
         <div
           key={item.name}
           style={{
-            width: `${item.value}%`,
-            backgroundColor: item.color,
+            width: `${100 * item.value / totalCount}%`,
+            background: `${item.color}`,
             height: "100%",
             borderTopLeftRadius: 2,
             borderBottomLeftRadius: 2,

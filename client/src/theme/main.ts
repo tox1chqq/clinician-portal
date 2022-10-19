@@ -18,11 +18,13 @@ declare module "@mui/material/styles" {
     tableHeaderText: string;
     tableBackgroundColor: string;
     borderTableColor: string;
-    normal: string;
-    critical: string;
-    good: string;
+    severe: string;
+    mild: string;
+    moderate: string;
     adherenceColor: string;
     tableButtonColor: string;
+    ibrutinib:string,
+    acalabrutinib: string
   }
 }
 
@@ -42,13 +44,17 @@ export const theme = createTheme({
     mainGrey: "#A1A0AF",
     pointColor: "#D2D0F1",
 
+    ibrutinib: '#5A6ACF',
+    acalabrutinib : '#8593ED',
+
+
     tableHeaderText: "#797882",
     tableBackgroundColor: "#F9F9FB",
     borderTableColor: "#E0E0E0",
 
-    normal: "#F3CE4D",
-    critical: "#FF1010",
-    good: "#4ABF7A",
+    moderate: "#F3CE4D",
+    severe: "#FF1010",
+    mild: "#4ABF7A",
 
     adherenceColor: "#6079D7",
     tableButtonColor: "#ECE9FF",

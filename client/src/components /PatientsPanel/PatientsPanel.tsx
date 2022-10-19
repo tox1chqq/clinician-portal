@@ -2,10 +2,15 @@ import { FC } from "react";
 import { PanelLayout, PatientsChart } from "../index";
 import { Grid, Typography } from "@mui/material";
 import logo from "../../assests/images/patients-panel.svg";
-import { mockData } from "../../mockData";
 import { ListPoint } from "../ListPoint/ListPoint";
+import {IPortalData} from "../../types";
 
-export const PatientsPanel: FC = () => {
+interface IPatientsPanel {
+    statics: IPortalData | {}
+}
+
+
+export const PatientsPanel:FC<IPatientsPanel> = ({statics}) => {
   return (
     <PanelLayout>
       <Grid container alignItems="center" sx={{ paddingTop: "12px" }}>
@@ -61,7 +66,7 @@ export const PatientsPanel: FC = () => {
                   lineHeight: "44px",
                 }}
               >
-                {mockData.length}
+                {statics.patientsCount}
               </Typography>
               <Typography sx={{ fontSize: "14px", color: "mainTextColor" }}>
                 Total Number
@@ -72,17 +77,17 @@ export const PatientsPanel: FC = () => {
             xs={10}
             sx={{ display: "flex", justifyContent: "space-between" }}
           >
-            <ListPoint total={20} value={9} color="semiColor" text="Male" />
+            <ListPoint total={statics.patientsCount} value={statics.maleCount} color="semiColor" text="Male" />
             <ListPoint
-              total={20}
-              value={11}
+              total={statics.patientsCount}
+              value={statics.femaleCount}
               color="femaleColor"
               text="Female"
             />
           </Grid>
         </Grid>
         <Grid item xs={6} sx={{ display: "flex", alignItems: "flex-end" }}>
-          <PatientsChart />
+          <PatientsChart maleCount={statics.maleCount} femaleCount={statics.femaleCount}/>
         </Grid>
       </Grid>
     </PanelLayout>

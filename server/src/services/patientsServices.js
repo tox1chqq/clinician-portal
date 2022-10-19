@@ -1,9 +1,11 @@
 import { Patient } from "../models/Patient.js";
 import { HttpStatusCodes, ResponseMessages } from "../contants/contants.js";
 import { PatientError } from "../errors/errors.js";
+import {getMedicationsHelper} from "../helpers/getMedicationsHelper.js";
+import {getSymptomsHelper} from "../helpers/getSymptomsHelper.js";
 
 export default class PatientsService {
-  static async getPatients() {
+  static async getGeneralInfo() {
     const patients = await Patient.find({});
 
     const maleCount = patients.filter((item) => item.sex === "Male").length;
@@ -21,9 +23,26 @@ export default class PatientsService {
       },0) / current.wellbeing.length)
     },0)/patients.length).toFixed(1)
 
+    const reportedCount = patients.reduce((prev,current) => {
+      if (current.wellbeing){
+        prev = prev + 1
+      }
+      return prev
+    },0)
 
-    return {maleCount, femaleCount, moodAvarage,wellbeingAvarage,patients };
+    const medicationsStatistic =  getMedicationsHelper(patients)
+
+    const symptomsStatistic= getSymptomsHelper(patients)
+
+    return {maleCount, femaleCount, moodAvarage,wellbeingAvarage, patientsCount: patients.length,reportedCount,medicationsStatistic,symptomsStatistic};
   }
+
+  static async getPatients() {
+    const patients = await Patient.find({});
+
+    return {patients};
+  }
+
 
   static async createNewPatient(
     fullName,

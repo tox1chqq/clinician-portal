@@ -13,10 +13,14 @@ class PatientsPortalApi {
         return instance
     }
 
-    fetchData = async () => {
-        const response = await this.getInstance().get('/patients').then((res) => res.data)
-        console.log(response)
-        return response
+    fetchPatients = async () => {
+        const response = await this.getInstance().get('/patients')
+        return response.data
+    }
+
+    fetchGeneralInfo = async () => {
+        const response = await  this.getInstance().get('/info')
+        return response.data
     }
 
 

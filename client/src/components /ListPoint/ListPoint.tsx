@@ -15,7 +15,7 @@ export const ListPoint: FC<IListPoint> = ({ total, value, text, color }) => {
         sx={{
           height: 8,
           width: 8,
-          backgroundColor: color,
+          backgroundColor: `${color}`,
           borderRadius: "50%",
           marginRight: "4px",
         }}

@@ -2,8 +2,14 @@ import { Box, Grid, Typography } from "@mui/material";
 import { PanelLayout } from "../index";
 import logo from "../../assests/images/mood.svg";
 import { CircularProgressWithLabel } from "../CircularProgressWithLabel/CircularProgressWithLabel";
+import {FC} from "react";
 
-export const MoodPanel = () => {
+interface IMoodPanel {
+  moodAvarage: number,
+  reportedCount: number,
+}
+
+export const MoodPanel:FC<IMoodPanel> = ({moodAvarage,reportedCount}) => {
   return (
     <PanelLayout>
       <Grid container justifyContent="space-between" alignItems="center">
@@ -20,14 +26,14 @@ export const MoodPanel = () => {
               Mood
             </Typography>
             <Typography sx={{ color: "additionText", fontSize: 14 }}>
-              17 patients reported
+              {reportedCount} patients reported
             </Typography>
           </Grid>
         </Grid>
         <Grid item sx={{ display: "flex", alignItems: "center" }}>
           <CircularProgressWithLabel
             size={56}
-            value={8.2}
+            value={moodAvarage}
             color={"moodCircle"}
           />
           <Typography

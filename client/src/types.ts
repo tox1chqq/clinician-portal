@@ -1,4 +1,4 @@
-export interface ILineProgressItem {
+export interface IStaticticItem {
   name: string;
   value: number;
   color: string;
@@ -22,7 +22,10 @@ interface IMedication{
   medication_name: string
 }
 
-
+export interface IStatistic{
+  statistic: IStaticticItem[],
+  totalCount: number
+}
 
 export interface IPatient{
   _id: number,
@@ -36,9 +39,12 @@ export interface IPatient{
 
 
 export interface IPortalData{
-  femaleCount: number,
+  femaleCount: number ,
   maleCount: number,
   moodAvarage: number,
   wellbeingAvarage: number,
-  patients: IPatient[]
+  patientsCount:number,
+  reportedCount: number,
+  medicationsStatistic: IStatistic,
+  symptomsStatistic: IStatistic
 }

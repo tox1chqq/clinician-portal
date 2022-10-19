@@ -1,31 +1,25 @@
-import React from "react";
+import React, {FC, memo} from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { Pie } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
-export const SymptomChart = () => {
+interface ISymptomChart {
+  symptomsLabels: string[],
+  symptomsValues: number[],
+  symptomsColors: string[]
+}
+
+export const SymptomChart:FC<ISymptomChart> = memo(({symptomsValues,symptomsColors,symptomsLabels}) => {
   const data = {
-    labels: [
-      "Fatigue",
-      "Diarrhea",
-      "Heart palpitations",
-      "Muscle aches",
-      "Bruising",
-    ],
+    labels: symptomsLabels,
     datasets: [
       {
         label: "# of Votes",
-        data: [10, 37, 25, 15, 13],
-        backgroundColor: [
-          "#4EAAFF",
-          "#6960D7",
-          "#C08EFF",
-          "#52B793",
-          "#2FBFDE",
-        ],
-        borderColor: ["#4EAAFF", "#6960D7", "#C08EFF", "#52B793", "#2FBFDE"],
+        data: symptomsValues,
+        backgroundColor: symptomsColors,
+        borderColor: symptomsColors,
         borderWidth: 1,
       },
     ],
@@ -88,4 +82,4 @@ export const SymptomChart = () => {
       }}
     />
   );
-};
+});

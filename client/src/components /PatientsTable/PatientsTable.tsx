@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { ListPoint } from "../ListPoint/ListPoint";
 import  detail from "../../assests/images/detail.svg";
-import {useState, useEffect, ChangeEvent, useContext, useCallback, Fragment} from "react";
+import {useState, useEffect, useCallback, Fragment} from "react";
 import {IPatient} from "../../types";
 import PatientsPortalApi from '../../services/services'
 
@@ -35,7 +35,7 @@ export const PatientsTable = () => {
 
   useEffect(() => {
     (async () => {
-      const result = await PatientsPortalApi.fetchData()
+      const result = await PatientsPortalApi.fetchPatients()
       setPatients(result.patients)
     })()
   },[])
@@ -116,7 +116,7 @@ export const PatientsTable = () => {
                   <ListPoint
                     key={item.name}
                     text={item.name}
-                    color={item.status}
+                    color={item.status.toLowerCase()}
                   />
                 ))}
               </TableCell>

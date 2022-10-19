@@ -1,4 +1,4 @@
-import React from "react";
+import  {FC} from "react";
 import {
   Chart as ChartJS,
   ArcElement,
@@ -17,13 +17,18 @@ ChartJS.register(
   ...registerables
 );
 
-export const PatientsChart = () => {
+interface IPatientsChart {
+  maleCount: number,
+  femaleCount: number
+}
+
+export const PatientsChart:FC<IPatientsChart> = ({maleCount,femaleCount}) => {
   const data = {
     labels: ["Male", "Female"],
     datasets: [
       {
         label: "",
-        data: [9, 11],
+        data: [maleCount, femaleCount],
         backgroundColor: ["#6960D7", "#E0DDFF"],
         borderWidth: 1,
       },
@@ -38,11 +43,11 @@ export const PatientsChart = () => {
         scales: {
           y: {
             min: 0,
-            max: 100,
+            max: femaleCount + maleCount,
             ticks: {
-              stepSize: 50,
+              stepSize: (femaleCount + maleCount)/2,
               callback: function (value) {
-                return value + "%";
+                return (value * 100 / (femaleCount + maleCount)) + "%";
               },
             },
           },
