@@ -10,13 +10,16 @@ import {
   Typography,
 } from "@mui/material";
 import { ListPoint } from "../ListPoint/ListPoint";
-import  detail from "../../assests/images/detail.svg";
-import {useState, useEffect, useCallback, Fragment} from "react";
-import {IPatient} from "../../types";
-import PatientsPortalApi from '../../services/services'
+import detail from "../../assests/images/detail.svg";
+import { useState, useEffect, useCallback, Fragment } from "react";
+import { IPatient } from "../../types";
+import PatientsPortalApi from "../../services/services";
+import { useNavigate } from "react-router-dom";
 
 export const PatientsTable = () => {
-  const [patients,setPatients] = useState<IPatient[] | []>([])
+  const navigate = useNavigate();
+
+  const [patients, setPatients] = useState<IPatient[] | []>([]);
   const [currentItems, setCurrentItems] = useState<IPatient[]>([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -27,19 +30,22 @@ export const PatientsTable = () => {
     setItemOffset(newOffset);
   };
 
+  const handleGoToPatient = (id) => {
+    navigate(`/patient/${id}`);
+  };
+
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(patients.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(patients.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage,patients]);
+  }, [itemOffset, itemsPerPage, patients]);
 
   useEffect(() => {
     (async () => {
-      const result = await PatientsPortalApi.fetchPatients()
-      setPatients(result.patients)
-    })()
-  },[])
-
+      const result = await PatientsPortalApi.fetchPatients();
+      setPatients(result.patients);
+    })();
+  }, []);
 
   const tableHeaders = [
     { title: "Name", subtitle: "", border: "16px 0 0 0px" },
@@ -51,19 +57,27 @@ export const PatientsTable = () => {
     { title: "View Details", subtitle: "", border: "0 16px 0 0" },
   ];
 
+  const getAvarageWellbeing = useCallback(
+    (patient) => {
+      return (
+        patient.wellbeing.reduce((prev, current) => {
+          return prev + current.day_wellbeing;
+        }, 0) / 7
+      ).toFixed(1);
+    },
+    [patients]
+  );
 
-  const getAvarageWellbeing = useCallback((patient)=>{
-        return (patient.wellbeing.reduce((prev,current) => {
-          return prev + current.day_wellbeing
-        },0)/7).toFixed(1)
-  },[patients])
-
-  const getAvarageMood = useCallback((patient)=>{
-    console.log('here')
-    return (patient.wellbeing.reduce((prev,current) => {
-      return prev + current.day_mood
-    },0)/7).toFixed(1)
-  },[patients])
+  const getAvarageMood = useCallback(
+    (patient) => {
+      return (
+        patient.wellbeing.reduce((prev, current) => {
+          return prev + current.day_mood;
+        }, 0) / 7
+      ).toFixed(1);
+    },
+    [patients]
+  );
 
   return (
     <TableContainer>
@@ -106,10 +120,12 @@ export const PatientsTable = () => {
                 </Typography>
               </TableCell>
               <TableCell align="center">
-                {patient.medications.map(medication => <Fragment key={medication.medication_name}>
-                  <Typography>{medication.medication_name}</Typography>
-                  <Typography>{medication.medication_dose}</Typography>
-                </Fragment>)}
+                {patient.medications.map((medication) => (
+                  <Fragment key={medication.medication_name}>
+                    <Typography>{medication.medication_name}</Typography>
+                    <Typography>{medication.medication_dose}</Typography>
+                  </Fragment>
+                ))}
               </TableCell>
               <TableCell align="center">
                 {patient.symptoms.map((item) => (
@@ -122,7 +138,7 @@ export const PatientsTable = () => {
               </TableCell>
               <TableCell align="center">
                 <Typography fontSize={20} fontWeight="bold">
-                 {getAvarageWellbeing(patient)}
+                  {getAvarageWellbeing(patient)}
                 </Typography>
               </TableCell>
               <TableCell align="center">
@@ -141,6 +157,7 @@ export const PatientsTable = () => {
               </TableCell>
               <TableCell align="center">
                 <IconButton
+                  onClick={() => handleGoToPatient(patient._id)}
                   sx={{ padding: "10px", backgroundColor: "tableButtonColor" }}
                 >
                   <img src={detail} alt="Detail" />

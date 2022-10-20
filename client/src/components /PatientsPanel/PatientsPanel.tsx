@@ -3,14 +3,13 @@ import { PanelLayout, PatientsChart } from "../index";
 import { Grid, Typography } from "@mui/material";
 import logo from "../../assests/images/patients-panel.svg";
 import { ListPoint } from "../ListPoint/ListPoint";
-import {IPortalData} from "../../types";
+import { IPortalData } from "../../types";
 
 interface IPatientsPanel {
-    statics: IPortalData | {}
+  statics: IPortalData | {};
 }
 
-
-export const PatientsPanel:FC<IPatientsPanel> = ({statics}) => {
+export const PatientsPanel: FC<IPatientsPanel> = ({ statics }) => {
   return (
     <PanelLayout>
       <Grid container alignItems="center" sx={{ paddingTop: "12px" }}>
@@ -73,11 +72,17 @@ export const PatientsPanel:FC<IPatientsPanel> = ({statics}) => {
               </Typography>
             </Grid>
           </Grid>
-          <Grid item
+          <Grid
+            item
             xs={10}
             sx={{ display: "flex", justifyContent: "space-between" }}
           >
-            <ListPoint total={statics.patientsCount} value={statics.maleCount} color="semiColor" text="Male" />
+            <ListPoint
+              total={statics.patientsCount}
+              value={statics.maleCount}
+              color="semiColor"
+              text="Male"
+            />
             <ListPoint
               total={statics.patientsCount}
               value={statics.femaleCount}
@@ -87,7 +92,10 @@ export const PatientsPanel:FC<IPatientsPanel> = ({statics}) => {
           </Grid>
         </Grid>
         <Grid item xs={6} sx={{ display: "flex", alignItems: "flex-end" }}>
-          <PatientsChart maleCount={statics.maleCount} femaleCount={statics.femaleCount}/>
+          <PatientsChart
+            maleCount={statics.maleCount}
+            femaleCount={statics.femaleCount}
+          />
         </Grid>
       </Grid>
     </PanelLayout>

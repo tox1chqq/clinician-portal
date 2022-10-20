@@ -3,7 +3,7 @@ import patientsRouter from "./routers/patients.router.js";
 import "./database/connection.js";
 import { config } from "./config/config.js";
 import { globalErrorHandler } from "./errors/globalHandlerError.js";
-import cors from 'cors'
+import cors from "cors";
 
 export default class Server {
   constructor() {

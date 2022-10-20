@@ -1,4 +1,4 @@
-import  {FC} from "react";
+import { FC } from "react";
 import {
   Chart as ChartJS,
   ArcElement,
@@ -18,11 +18,14 @@ ChartJS.register(
 );
 
 interface IPatientsChart {
-  maleCount: number,
-  femaleCount: number
+  maleCount: number;
+  femaleCount: number;
 }
 
-export const PatientsChart:FC<IPatientsChart> = ({maleCount,femaleCount}) => {
+export const PatientsChart: FC<IPatientsChart> = ({
+  maleCount,
+  femaleCount,
+}) => {
   const data = {
     labels: ["Male", "Female"],
     datasets: [
@@ -45,9 +48,9 @@ export const PatientsChart:FC<IPatientsChart> = ({maleCount,femaleCount}) => {
             min: 0,
             max: femaleCount + maleCount,
             ticks: {
-              stepSize: (femaleCount + maleCount)/2,
+              stepSize: (femaleCount + maleCount) / 2,
               callback: function (value) {
-                return (value * 100 / (femaleCount + maleCount)) + "%";
+                return (value * 100) / (femaleCount + maleCount) + "%";
               },
             },
           },

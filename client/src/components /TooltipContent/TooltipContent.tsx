@@ -12,7 +12,7 @@ export const TooltipContent: FC = () => {
         boxShadow: "1px 3px 10px rgba(0, 0, 0, 0.16)",
         borderRadius: "6px",
         maxWidth: 250,
-          backgroundColor: 'white'
+        backgroundColor: "white",
       }}
     >
       <img src={logo} alt="Logo" />

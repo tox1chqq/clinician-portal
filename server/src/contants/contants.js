@@ -13,18 +13,16 @@ export const ResponseMessages = {
   SERVER_ERROR: "Server error",
 };
 
-
 export const MedicationColors = {
   Ibrutinib: "#5A6ACF",
-  Acalabrutinib: '#8593ED',
-  Zanubrutinib: '#C7CEFF',
-
-}
+  Acalabrutinib: "#8593ED",
+  Zanubrutinib: "#C7CEFF",
+};
 
 export const SymptomColors = {
   Fatigue: "#4EAAFF",
-  Diarrhea: '#6960D7',
-  Heartpalpitations: '#C08EFF',
-  Muscleaches: '#52B793',
-  Bruising: '#2FBFDE',
-}
+  Diarrhea: "#6960D7",
+  Heartpalpitations: "#C08EFF",
+  Muscleaches: "#52B793",
+  Bruising: "#2FBFDE",
+};

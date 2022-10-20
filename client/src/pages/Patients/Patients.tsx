@@ -18,7 +18,7 @@ export const Patients: FC = () => {
       >
         <Typography
           variant="h3"
-          component="h2"
+          component="h3"
           sx={{ color: "mainTextColor", fontSize: "24px", fontWeight: "700" }}
         >
           Patients

@@ -2,15 +2,17 @@ import { Box, Grid, Typography } from "@mui/material";
 import { PanelLayout } from "../index";
 import logo from "../../assests/images/phisical-panel.svg";
 import { CircularProgressWithLabel } from "../CircularProgressWithLabel/CircularProgressWithLabel";
-import {FC} from "react";
-
+import { FC } from "react";
 
 interface IPhysicalWellbeingPanel {
-  wellbeingAvarage: number,
-  reportedCount: number
+  wellbeingAvarage: number;
+  reportedCount: number;
 }
 
-export const PhysicalWellbeingPanel:FC<IPhysicalWellbeingPanel> = ({wellbeingAvarage,reportedCount}) => {
+export const PhysicalWellbeingPanel: FC<IPhysicalWellbeingPanel> = ({
+  wellbeingAvarage,
+  reportedCount,
+}) => {
   return (
     <PanelLayout>
       <Grid container justifyContent="space-between" alignItems="center">

@@ -34,3 +34,20 @@ export function deletePatientValidator(req, res, next) {
     next(error);
   }
 }
+
+export function getPatientValidator(req, res, next) {
+  const { id } = req.params;
+
+  try {
+    if (!id) {
+      throw new ValidationError(
+        HttpStatusCodes.BAD_REQUEST,
+        "Patient ID is required"
+      );
+    }
+
+    next();
+  } catch (error) {
+    next(error);
+  }
+}

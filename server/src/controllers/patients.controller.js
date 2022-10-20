@@ -34,6 +34,18 @@ export default class PatientsController {
     }
   }
 
+  async getPatientById(req, res, next) {
+    try {
+      const { id } = req.params;
+      const result = await PatientsService.getPatientById(id);
+
+      return res.status(HttpStatusCodes.SUCCESS).json(result);
+    } catch (e) {
+      console.log(e);
+      next(e);
+    }
+  }
+
   async getGeneralInfo(req, res, next) {
     try {
       const result = await PatientsService.getGeneralInfo();

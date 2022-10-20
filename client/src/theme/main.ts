@@ -23,8 +23,8 @@ declare module "@mui/material/styles" {
     moderate: string;
     adherenceColor: string;
     tableButtonColor: string;
-    ibrutinib:string,
-    acalabrutinib: string
+    ibrutinib: string;
+    acalabrutinib: string;
   }
 }
 
@@ -44,9 +44,8 @@ export const theme = createTheme({
     mainGrey: "#A1A0AF",
     pointColor: "#D2D0F1",
 
-    ibrutinib: '#5A6ACF',
-    acalabrutinib : '#8593ED',
-
+    ibrutinib: "#5A6ACF",
+    acalabrutinib: "#8593ED",
 
     tableHeaderText: "#797882",
     tableBackgroundColor: "#F9F9FB",
