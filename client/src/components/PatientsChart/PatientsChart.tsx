@@ -39,6 +39,11 @@ export const PatientsChart: FC<IPatientsChart> = ({
             options={{
                 scales: {
                     y: {
+                        grid: {
+                            drawBorder: false,
+                            borderDash: [5, 5],
+                            borderColor: '#D9D8E8',
+                        },
                         min: 0,
                         max: femaleCount + maleCount,
                         ticks: {
@@ -54,6 +59,7 @@ export const PatientsChart: FC<IPatientsChart> = ({
                     x: {
                         grid: {
                             display: false,
+
                         },
                     },
                 },
