@@ -1,3 +1,3 @@
-export * from "./Home/Home";
-export * from "./Patient/Patient";
-export * from "./Patients/Patients";
+export * from './Home/Home'
+export * from './Patient/Patient'
+export * from './Patients/Patients'
